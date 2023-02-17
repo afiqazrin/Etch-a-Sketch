@@ -1,0 +1,46 @@
+@import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Press Start 2P', sans-serif;
+}
+body {
+    background-image: url(images/pixelcity.jpeg);
+    font-family: 'Press Start 2P';
+}
+.title {
+    margin: 25px 0 25px 0;
+    font-size: 40px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid-container {
+    width: 600px;
+}
+
+.grid {
+    background-color: white;
+    width: 35.5px;
+    height: 35.5px;
+    border: 1px solid black;
+    float: left;
+    border-radius: 5px;
+}
+
+.button-container button{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 600px;
+    height: 35px;
+    font-size: larger;
+    border-radius: 5px;
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
