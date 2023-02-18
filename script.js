@@ -1,56 +1,57 @@
 let gridContainer = document.querySelector('.grid-container');
-let clearButton = document.querySelector('.clear-btn');
-let customButton = document.querySelector('.custom-btn');
-let grid = gridContainer.children;
-for(let i = 0; i<256; i++)
-{
-    let div = document.createElement('div')
-    div.addEventListener('mouseover', ()=>
-    {
-        // randomising color to change to when hovered over
-        let a = Math.floor(Math.random()*255);
-        let b = Math.floor(Math.random()*255);
-        let c = Math.floor(Math.random()*255);
-        div.style.backgroundColor = `rgb(${a},${b},${c})`;
-    })
-    div.className = 'grid';
-    gridContainer.append(div);
+let columns = gridContainer.getElementsByClassName('grid');
+let gridContainerWidth = 500;
+
+function createGrid(size) {
+    let gridDimensions = size*size;
+    let gridSize = (gridContainerWidth/size)-2;
+    for(let i = 0; i<gridDimensions; i++)   {
+        let div = document.createElement('div');
+        div.classList.add('grid')
+        div.style.width = `${gridSize}px`;
+        div.style.height = `${gridSize}px`;
+        gridContainer.append(div);
+    }
+
 }
 
-clearButton.addEventListener('click', ()=> {
-    for(let i=0; i<grid.length; i++)
-    {
-        console.log(grid.length)
+createGrid(4);
 
-        grid[i].style.backgroundColor = 'white';
+const rainbowButton = document.querySelector('.rainbow')
+rainbowButton.addEventListener('click', () => {
+    for(let i = 0; i<columns.length; i++) {
+        columns[i].addEventListener('mouseover', () => {
+            let red = Math.floor(Math.random()*255);
+            let green = Math.floor(Math.random()*255);
+            let blue = Math.floor(Math.random()*255);
+            columns[i].style.backgroundColor = `rgb(${red},${green},${blue})`;
+        });
     }
-})
+});
 
-function createGrid() {
-    let gridSize = prompt('Please enter a number between 1 and 100');
-    if(gridSize<1 || gridSize >100)
-    {
-        alert("Please enter a valid input!")
+const customButton = document.querySelector('.custom');
+customButton.addEventListener('click', () => {
+    let input = prompt('Please enter a value between 1 and a 100');
+    if(input < 1 || input > 100)    {
+        alert('Please input a valid number');
     }
-    else{
-        let numberOfGrids = gridSize*gridSize;
-        gridContainer.innerHTML="";
-        for(let i=0; i<numberOfGrids; i++)
-        {
-            let div = document.createElement('div')
-            div.addEventListener('mouseover', ()=>
-            {
-                // randomising color to change to when hovered over
-                let a = Math.floor(Math.random()*255);
-                let b = Math.floor(Math.random()*255);
-                let c = Math.floor(Math.random()*255);
-                div.style.backgroundColor = `rgb(${a},${b},${c})`;
-            })
-            div.className = 'grid';
-            gridContainer.append(div);
+    else {
+        gridContainer.innerHTML = "";
+        createGrid(input);
+    }
+});
+
+const blackButton = document.querySelector('.black');
+blackButton.addEventListener('click', () => {
+    for(let i = 0; i<columns.length; i++) {
+        columns[i].addEventListener('mouseover', () => {
+            columns[i].style.backgroundColor = 'rgb(0,0,0)';
+        });
+}});
+
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', () => {
+    for(let i = 0; i<columns.length; i++) {
+            columns[i].style.backgroundColor = 'rgb(255,255,255)';
         }
-    }
-}
-customButton.addEventListener('click', ()=>{
-    createGrid();
 })
